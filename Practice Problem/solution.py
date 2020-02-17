@@ -1,7 +1,7 @@
 #### Code for Hash Code 2020
 #### Hash Code practice problem - More pizza
 #### Author - Jordan Ung <jordanung@protonmail.com>
-#### Last edited: 16.02.20
+#### Last edited: 17.02.20
 
 FILE_NAME = 'a_example.in'
 
@@ -18,7 +18,7 @@ def find_optimal_slices(filename):
         for line in file:
             pizza_slices += [int(x) for x in line.split()]
 
-    pizza_dict = {}
+    pizza_dict = {0:[]}
 
     # Cycle through all the pizzas and generate all the possible slice amounts
     for index in range(len(pizza_slices)):
@@ -26,22 +26,29 @@ def find_optimal_slices(filename):
         
         temp_dict = {}
         for val in pizza_dict:
+
+            # Optimal pizza slices achieved, printing results
+            if val + current_slices == max_slices:
+                # print(" + ".join(str(pizza_slices[i]) for i in (pizza_dict[val] + [index])))
+                # total = 0
+                # for i in (pizza_dict[val] + [index]):
+                #     total += pizza_slices[i]
+                # print(total)
+                print(len(pizza_dict[val]) + 1)
+                print(" ".join(str(i) for i in (pizza_dict[val] + [index])))
+                return
+
+            # Too many slices of pizza, don't need
+            elif val + current_slices > max_slices:
+                continue
+
             # Check that we aren't adding redundant information
-            if ((val + current_slices) not in pizza_dict) and \
-                val + current_slices < max_slices:
+            elif ((val + current_slices) not in pizza_dict):
                 temp_dict[val + current_slices] = pizza_dict[val] + [index]
 
-        if current_slices not in pizza_dict:
-            temp_dict[current_slices] = [index]
 
         # Update our slice amount tracker
         pizza_dict.update(temp_dict)
-
-        # Check if the optimal maximum slices of pizza has been achieved
-        if max_slices in pizza_dict:
-            print(len(pizza_dict[max_slices]))
-            print(" ".join(str(index) for index in pizza_dict[max_slices]))
-            return
 
     # The optimal number hasn't been achieved - find closest to optimal
     pizza_indexes = sorted(pizza_dict.items(), key=lambda x:x[0])[-1][1]
