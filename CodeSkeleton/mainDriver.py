@@ -1,10 +1,16 @@
-import glob
+# Import functions from the different py files
+from scoring import score
+from output import write
+from parsing import parse
+from solver import solve
 
-import parsr, solver, scorer, writer
+SUBMISSION_FILENAME = "submission.txt"
 
-for idx, filename in enumerate(glob.glob('datasets/*')):
-    dataset = parsr.parse(filename)
-    solution = solver.solve(dataset)
-	score = scorer.score(solution, dataset)
-	print('Score for %s: %s/%s (%s to perfect score)' % (filename, score, dataset['knapsize'], dataset['knapsize'] - score))
-	writer.write(solution, filename.replace('datasets','solutions'))
+# Solve Problem executes the four steps: read from input, solve, output and score
+def solve_problem(filename):
+	dataset = parse(filename)
+	solution = solve(dataset)
+	write(solution, SUBMISSION_FILENAME)
+	score(solution, SUBMISSION_FILENAME)
+
+solve_problem('./datasets/a_example.txt')
