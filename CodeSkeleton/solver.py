@@ -17,9 +17,8 @@ def find_next_best_library():
         ratio = total_value_of_scanning / library_time_to_open_data
         library_ranking.append((ratio, library_number))
 
-    library_ranking.sort( reverse=True)
 
-    chosen_library = library_ranking[0][1]
+    chosen_library = max (library_ranking)[1]
 
     final_chosen_libraries.append(chosen_library)
 
@@ -28,8 +27,9 @@ def find_next_best_library():
 
     days_remaining -= library_days_to_open_data[library_number]
 
-while (days_remaining > 0):
-    find_next_best_library()
+def solve():
+    while (days_remaining > 0):
+        find_next_best_library()
 
 
 

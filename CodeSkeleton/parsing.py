@@ -17,11 +17,12 @@ def parse(filename):
             'nlib' = nlib
             'ndays' = ndays
             'scores' = scores
+            'libValues' = []
         }
 
         for j in range(nlib):
             lib_nbooks, lib_ndays, lib_nship = map(int, fi.readline().split())
             lib_books_id = list(map(int, fi.readline().split()))
-            dataset['i'] = [lib_nbooks, lib_ndays, lib_nship, lib_books_id]
+            dataset['libValues'].append ( [lib_nbooks, lib_ndays, lib_nship, lib_books_id])
         
         return dataset 
