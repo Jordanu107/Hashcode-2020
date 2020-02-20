@@ -14,3 +14,4 @@ def solve_problem(filename):
     score(solution_file, dataset)
 
 solve_problem('./datasets/a_example.txt')
+# solve_problem('./datasets/b_read_on.txt')
