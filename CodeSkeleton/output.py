@@ -1,12 +1,16 @@
 def write(solution, filename):
     with open(filename, 'w') as fo:
-        fo.write(str(len(solution))+'\n')
+        fo.write(str(solution['nlibs'])+'\n')
+        libs_string = ""
+        for lib in solution['libs']:
+            libs_string += str(lib['lib']) +  " "
+        fo.write(libs_string +'\n')
+        for lib in solution['libs']:
+            libs_books_string = ""
+            for book in lib['books']:
+                libs_books_string += str(book[1]) + " "
+            fo.write(libs_books_string +'\n')
 
-        for sol in solution:
-            fo.write(str(sol[0])+ ' ' + str(len(sol[1])) + '\n')
-            for book in sol[1]:
-                fo.write(str(book) + ' ')
-            fo.write('\n')
     return filename
 
 

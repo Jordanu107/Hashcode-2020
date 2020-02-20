@@ -4,8 +4,8 @@ days_remaining = 0
 final_chosen_libraries = []
 
 def find_next_best_library(dataset):
-    print ('doing another round')
-    print(dataset)
+    # print ('doing another round')
+    # print(dataset)
     global days_remaining
     global final_chosen_libraries
 
