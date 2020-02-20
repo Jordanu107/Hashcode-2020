@@ -1,7 +1,7 @@
 
 #step 1: 
 
-days_remaining = days_remaining_data
+days_remaining = 0
 
 final_chosen_libraries = []
 
@@ -9,14 +9,13 @@ def find_next_best_library():
 
     library_ranking = []
 
-    for library_number in number_of_libraries_data:
+    for library_number in range(dataset['nlib']):
 
-        books_can_be_scanned = (days_remainging_data - library_days_to_open_data[library_number]) * library_books_per_day_data
+        books_can_be_scanned = (days_remaining - dataset['libValues'][library_number][1]) * dataset['libValues'][library_number][2]
         total_value_of_scanning = sum ([book_value_data for book in library_books_data[library_number]].sort( reverse=True)[:books_can_be_scanned] )
 
         ratio = total_value_of_scanning / library_time_to_open_data
         library_ranking.append((ratio, library_number))
-
 
     chosen_library = max (library_ranking)[1]
 
@@ -27,9 +26,11 @@ def find_next_best_library():
 
     days_remaining -= library_days_to_open_data[library_number]
 
-def solve():
+def solve(dataset):
+    days_remaining = dataset['ndays']
+
     while (days_remaining > 0):
-        find_next_best_library()
+        find_next_best_library(dataset)
 
 
 
