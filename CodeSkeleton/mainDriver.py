@@ -8,9 +8,9 @@ SUBMISSION_FILENAME = "submission.txt"
 
 # Solve Problem executes the four steps: read from input, solve, output and score
 def solve_problem(filename):
-	dataset = parse(filename)
-	solution = solve(dataset)
-	write(solution, SUBMISSION_FILENAME)
-	score(solution, SUBMISSION_FILENAME)
+    dataset = parse(filename)
+    solution = solve(dataset)
+    write(solution, SUBMISSION_FILENAME)
+    score(solution, SUBMISSION_FILENAME)
 
 solve_problem('./datasets/a_example.txt')
