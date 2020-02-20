@@ -7,7 +7,7 @@ def write(solution, filename):
             for book in sol[1]:
                 fo.write(str(book) + ' ')
             fo.write('\n')
-
+    return filename
 
 
 # solution = [
