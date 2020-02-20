@@ -1,4 +1,5 @@
 def score(solution, dataset):
+    print("---------- Scoring ----------")
     current_time = 0
     books_scanned = []
     with open(solution) as file:
@@ -9,17 +10,19 @@ def score(solution, dataset):
         for lib in range(num_of_libraries):
             library_id, books_per_day = [int(x) for x in next(file).split()]
             book_order = [int(x) for x in next(file).split()]
-            current_time += dataset['lib_id'][library_id]
+            print(dataset['libValues'][library_id]['lib_ndays'])
+            current_time += dataset['libValues'][library_id]['lib_ndays']
 
             # Library has enough time to sign up and scan through all of it's books
-            if ((dataset['lib_id'][library_id][0] / books_per_day) + 1 + current_time + dataset['lib_id'][library_id][1]) <= time_allowed:
-                books_scanned += dataset['lib_id'][library_id][3]
-            
+            if ((dataset['libValues'][library_id]['lib_nbooks'] / books_per_day) + current_time +
+                dataset['libValues'][library_id]['lib_ndays']) <= time_allowed:
+                books_scanned += dataset['libValues'][library_id]['lib_books_ids']
+
             # Library won't have enough time to scan all, if any books...
             else:
-                scanned_books = time_allowed - current_time - dataset['lib_id'][library_id][1]
+                scanned_books = time_allowed - current_time - dataset['libValues'][library_id]['lib_ndays']
                 books_scanned += book_order[:scanned_books]
-        
+
         books_scanned = list(set(books_scanned))
         scoring_list = [dataset['scores'][x] for x in books_scanned]
 
