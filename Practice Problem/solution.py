@@ -55,6 +55,8 @@
 #     print(len(pizza_indexes))
 #     print(" ".join(str(index) for index in pizza_indexes))
 
+import sys
+
 def find_optimal_slices(filename):
     max_slices = 0
     num_of_pizzas = 0
@@ -69,8 +71,6 @@ def find_optimal_slices(filename):
 
     
     pizza_list = [ [0] * (max_slices + 1) for _ in range(num_of_pizzas)]
-
-    print (pizza_list)
 
     # 'hard code' for the first column/item
     for capacity in range(max_slices+1):
@@ -122,8 +122,6 @@ def find_optimal_slices(filename):
             #     else:
             #         pizza_list[pizza][capacity] = pizza_list[pizza - 1][capacity]
 
-    for list in pizza_list:
-        print(list);
 
 
     # # Back traverse through to find the pizzas that were consumed
@@ -131,15 +129,9 @@ def find_optimal_slices(filename):
     current_column = max_slices
     pizzas_chosen = []
 
-    indexes = []
 
     # Don't look a tthe first pizza row, account for below
     for i in range(len(pizza_list) - 1, 0, -1):
-
-        # # The pizza before it, MUST have been used to compute the highest pizza value
-        # if highest_pizza_value not in pizza_list[i - 1]:
-        #     indexes.append(i)
-        #     highest_pizza_value -= pizza_slices[i]
 
         try:
             if pizza_list[i-1][current_column] != highest_pizza_value:
@@ -161,19 +153,15 @@ def find_optimal_slices(filename):
         total_score += pizza_slices[pizza]
 
 
-
-    # if max(pizza_list[0]) == highest_pizza_value:
-    #     indexes.append(0)
-
     print(len(pizzas_chosen))
     print(" ".join(str(pizza_number) for pizza_number in pizzas_chosen))
-    print("total score is")
-    print(total_score)
+    print("total score is" + str (total_score), file=sys.stderr)
+
 
 
 # find_optimal_slices(FILE_NAME)
 # find_optimal_slices('a_example.in')
-# find_optimal_slices('b_small.in')
+find_optimal_slices('b_small.in')
 # find_optimal_slices('c_medium.in')
-find_optimal_slices('d_quite_big.in')
+# find_optimal_slices('d_quite_big.in')
 # find_optimal_slices('e_also_big.in')
