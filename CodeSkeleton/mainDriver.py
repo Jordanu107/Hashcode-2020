@@ -10,7 +10,7 @@ SUBMISSION_FILENAME = "submission.txt"
 def solve_problem(filename):
 	dataset = parse(filename)
 	solution = solve(dataset)
-	write(solution, SUBMISSION_FILENAME)
-	score(solution, SUBMISSION_FILENAME)
+	filename = write(solution, SUBMISSION_FILENAME)
+	#score(filename, dataset)
 
 solve_problem('./datasets/a_example.txt')
