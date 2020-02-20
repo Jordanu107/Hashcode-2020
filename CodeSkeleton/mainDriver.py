@@ -4,6 +4,8 @@ from output import write
 from parsing import parse
 from solver import solve
 
+import PriorityQueue
+
 SUBMISSION_FILENAME = "submission.txt"
 
 # Solve Problem executes the four steps: read from input, solve, output and score

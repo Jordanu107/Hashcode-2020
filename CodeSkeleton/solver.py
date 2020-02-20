@@ -1,48 +1,39 @@
+# dataset = {
+    # 'nbooks' = number of books in total
+    # 'nlib' = number of libraries in total
+    # 'days' = number of days available
+    # 'scores' = a list of scores with its index corresponding to the book number
+    # (so scores = [1, 2, 3] means book 0 has score 1 etc)
 
-#step 1: 
+    # every (key, value) pair after this represent a library
+    # 'lib_id': [lib_nbooks, lib_signup, lib_ship, [lib_books]]
+    # example:
+    #     '0': [5, 2, 2, [0, 1, 2, 3, 4]]
+    # library 0 has 5 books, takes 2 days to signup, ship 2 books per day,
+    # library 0 has books indexed 0, 1, 2, 3, 4
+    #     (use this same index to find its score in scores list from line 6)
+# }
 
-days_remaining = 0
+# solution = [
+#   [library_ID, [book_ID, ...]],
+#   [library_ID, [book_ID, ...]],
+#   ...
+# ]
 
-# final solution, of form (chosen_library,chosen_library_books)
-final_chosen_libraries = []
+# solution = [
+#     [1, [5,2,3]],
+#     [0, [0,1,2,3,4]]
+# ]
 
-def find_next_best_library():
-
-    library_ranking = []
-
-    for library_number in range(dataset['nlib']):
-
-        books_can_be_scanned = (days_remaining - dataset['libValues'][library_number]['lib_ndays']) * dataset['libValues'][library_number]['lib_nship']
-        total_value_of_scanning = sum ([scores[book] for book in dataset['libValues'][library_number]['lib_books_ids']].sort( reverse=True)[:books_can_be_scanned] )
-
-        ratio = total_value_of_scanning / dataset['libValues'][library_number]['lib_ndays']
-        library_ranking.append((ratio, library_number))
-
-    chosen_library = max (library_ranking)[1]
-    chosen_library_books_can_be_scanned = (days_remaining - dataset['libValues'][chosen_library]['lib_ndays']) * dataset['libValues'][chosen_library]['lib_nship']
-    chosen_library_books = [(scores[book],book) for book in dataset['libValues'][chosen_library]['lib_books_ids']].sort( reverse=True)[:chosen_library_books_can_be_scanned] )
-    final_chosen_libraries.append((chosen_library,chosen_library_books))
-
-    for book in library_books_data[chosen_library]:
-        book_value_data[book] = 0
-
-    days_remaining -= dataset['libValues'][library_number]['lib_ndays']
 
 def solve(dataset):
-    days_remaining = dataset['ndays']
+    solution = [[1, [5, 2, 3]], [0, [0, 1, 2, 3, 4]]]
+    current_time = 0
+    available_libs = [x for x in range(dataset['nlib'])]
 
-    while (days_remaining > 0):
-        find_next_best_library(dataset)
+    # for lib in range(dataset['nlib']):
+    #     current_library = dataset[lib]
+    #
+    #     if current_time +
 
-    solution = {
-        'nlibs' : len(final_chosen_libraries)
-        'libs' : []
-    }
-
-    for library in final_chosen_libraries:
-        solution['libs'].append({'lib' : library[0], 'num_books': len(library[1]), 'books': library[1] })
-
-    return (solution)
-
-
-
+    return solution
