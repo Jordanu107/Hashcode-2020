@@ -14,14 +14,15 @@ def score(solution, dataset):
             current_time += dataset['libValues'][library_id]['lib_ndays']
 
             # Library has enough time to sign up and scan through all of it's books
-            if ((dataset['libValues'][library_id]['lib_nbooks'] / books_per_day) + current_time + dataset['libValues'][library_id]['lib_ndays']) <= time_allowed:
+            if ((dataset['libValues'][library_id]['lib_nbooks'] / books_per_day) + current_time +
+                dataset['libValues'][library_id]['lib_ndays']) <= time_allowed:
                 books_scanned += dataset['libValues'][library_id]['lib_books_ids']
-            
+
             # Library won't have enough time to scan all, if any books...
             else:
                 scanned_books = time_allowed - current_time - dataset['libValues'][library_id]['lib_ndays']
                 books_scanned += book_order[:scanned_books]
-        
+
         books_scanned = list(set(books_scanned))
         scoring_list = [dataset['scores'][x] for x in books_scanned]
 
@@ -35,9 +36,3 @@ def score(solution, dataset):
 # <order of the books being scanned from first library to be scanned e.g. 5 2 3>
 # <id of second library...>
 # <order of the books scanned at library two...>
-
-
-# dataset['scores'][<library_id>][0] = num_books
-# dataset['scores'][<library_id>][1] = days_to_sign_up
-# dataset['scores'][<library_id>][2] = books_per_day
-# dataset['scores'][<library_id>][3] = list of books at that library
