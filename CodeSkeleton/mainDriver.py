@@ -11,7 +11,9 @@ def solve_problem(filename):
     dataset = parse(filename)
     solution = solve(dataset)
     solution_file = write(solution, SUBMISSION_FILENAME)
-    score(solution_file, dataset)
+    # score(solution_file, dataset)
 
-solve_problem('./datasets/a_example.txt')
+# solve_problem('./datasets/a_example.txt')
 # solve_problem('./datasets/b_read_on.txt')
+# solve_problem('./datasets/c_incunabula.txt')
+solve_problem('./datasets/d_tough_choices.txt')
