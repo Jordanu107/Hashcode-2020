@@ -10,7 +10,6 @@ def score(solution, dataset):
         for lib in range(num_of_libraries):
             library_id, books_per_day = [int(x) for x in next(file).split()]
             book_order = [int(x) for x in next(file).split()]
-            print(dataset['libValues'][library_id]['lib_ndays'])
             current_time += dataset['libValues'][library_id]['lib_ndays']
 
             # Library has enough time to sign up and scan through all of it's books

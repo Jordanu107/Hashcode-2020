@@ -29,7 +29,8 @@
 def solve(dataset):
     solution = [[1, [5, 2, 3]], [0, [0, 1, 2, 3, 4]]]
     current_time = 0
-    available_libs = [x for x in range(dataset['nlib'])]
+    available_libs = sorted([int(x) for x in range(int(dataset['nlib']))],
+                            key=lambda x:int(dataset['libValues'][x]['lib_ndays']))
 
     # for lib in range(dataset['nlib']):
     #     current_library = dataset[lib]
